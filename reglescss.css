@@ -13,3 +13,13 @@ float: none; /* par défaut */
 .boite-index {
   width: 200px
   height: 300px
+}
+
+.shape {
+  padding: 20px;
+  margin: 20px;
+  border: 10px solid black;
+  border-radius: 50%;
+  float: none;
+  shape-outside: border-box;
+}
