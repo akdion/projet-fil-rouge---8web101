@@ -1,4 +1,16 @@
 
+position: static; /* par défaut */
+position: relative; /* par rapport à sa position normale */
+position: absolute; /* par rapport à son conteneur */
+position: fixed; /* fixé à l'écran */
+position: sticky; /* se fixe lors du défilement */
+
+
+float: left; /* flotte à gauche */
+float: right; /* flotte à droite */
+float: none; /* par défaut */
+
+
 div {
   border-width: 2px;
   border-style: solid;
