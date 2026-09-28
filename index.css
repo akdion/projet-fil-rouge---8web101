@@ -1,15 +1,4 @@
 
-position: static; /* par défaut */
-position: relative; /* par rapport à sa position normale */
-position: absolute; /* par rapport à son conteneur */
-position: fixed; /* fixé à l'écran */
-position: sticky; /* se fixe lors du défilement */
-
-
-float: left; /* flotte à gauche */
-float: right; /* flotte à droite */
-float: center;
-float: none; /* par défaut */
 
 
 div {
@@ -17,12 +6,11 @@ div {
     border-style: solid;
     border-color: black;
     width: 300px;
-    height: 300px;
-    
+    height: 300px; 
 }
 
 
 
 h1 {
-    color:pink;
+    color:rgb(210, 32, 61);
 }
