@@ -8,6 +8,7 @@ position: sticky; /* se fixe lors du défilement */
 
 float: left; /* flotte à gauche */
 float: right; /* flotte à droite */
+float: middle;
 float: none; /* par défaut */
 
 
