@@ -1,0 +1,7 @@
+
+
+position: static; /* par défaut */
+position: relative; /* par rapport à sa position normale */
+position: absolute; /* par rapport à son conteneur */
+position: fixed; /* fixé à l'écran */
+position: sticky; /* se fixe lors du défilement */
