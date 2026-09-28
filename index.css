@@ -1,12 +1,7 @@
 
-body {
-
-    border-block-start: solid;
-    writing-mode: horizontal-tb;
+div {
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
 }
- * {
-    font-family: cursive;
-
- }
-
  
