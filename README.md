@@ -7,4 +7,4 @@
 
 
 Images
-<img width="6000" height="3989" alt="levanevsky-sunset-4086848" src="https://github.com/user-attachments/assets/8f15a445-babc-4379-a42e-229a8bcdb0a6" />
+<img width="1000" height="500" alt="levanevsky-sunset-4086848" src="https://github.com/user-attachments/assets/8f15a445-babc-4379-a42e-229a8bcdb0a6" />
