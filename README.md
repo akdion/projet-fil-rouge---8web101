@@ -7,4 +7,5 @@
 
 
 Images
-<img width="50%" height="50%" alt="levanevsky-sunset-4086848" src="https://github.com/user-attachments/assets/8f15a445-babc-4379-a42e-229a8bcdb0a6" />
+<img width="1920" height="936" alt="12019-iceland-2035439_1920" src="https://github.com/user-attachments/assets/aebebc3b-19ad-4977-91f4-ce8c5e2d64b8" />
+
