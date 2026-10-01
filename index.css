@@ -9,8 +9,13 @@ div {
     height: 400px; 
     margin: 20px auto;
     padding: 20px;
+<<<<<<< HEAD
     background-color: rgb(133, 218, 235);
     color:rgb(47, 13, 220);
+=======
+    background-color: rgb(250, 218, 221);
+    color:rgb(175, 161, 243);
+>>>>>>> 397964b82360e4e61c56d57a73fb6f4b0ac659ef
 
 }
 
@@ -26,5 +31,11 @@ label {
 
 body {
     background-color: rgb(247, 178, 205);
+<<<<<<< HEAD
     
+=======
+    background-image: url("https://github.com/user-attachments/assets/76e00e52-1e18-4d70-8d37-271bf8de904d");
+    background-size: cover;
+    background-repeat: no-repeat;
+>>>>>>> 397964b82360e4e61c56d57a73fb6f4b0ac659ef
 }
