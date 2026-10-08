@@ -1,4 +1,17 @@
 
-body{
+body {
     background-color: rgb(247, 178, 205);
 }
+
+div1 {
+    border-width: 0.5px;
+    border-style: solid;
+    border-color: pink;
+    width: 300px;
+    height: 400px; 
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgb(250, 218, 221);
+    color:rgb(175, 161, 243);
+    }
+
