@@ -1,4 +1,4 @@
-div {
+div1 {
     border-width: 2px;
     border-style: solid;
     border-color: black;
@@ -11,6 +11,21 @@ div {
     color:rgb(18, 18, 18);
 
 }
+
+div2 {
+    border-width: 2px;
+    border-style: solid;
+    border-color: pink;
+    width: 1000px;
+    height: 100px; 
+    margin-left: auto;
+    margin-right: 0;
+    padding: 20px;
+    background-color: rgb(250, 218, 221);
+    color:rgb(175, 161, 243);;
+
+}
+
 
 body {
     background-color: rgb(247, 178, 205);
