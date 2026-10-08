@@ -30,15 +30,49 @@ main {
     border: 2px solid #ffffff;
     border-radius: 15px;
     padding: 20px;
-    min-height: 400px;
+    min-height: 500px;
 }
 
-.conversations {
+.conversation {
     background-color: rgb(247, 178, 205);
     border: 2px solid #ffffff;
     border-radius: 15px;
     padding: 20px;
-    min-height: 400px;
+    min-height: 500px;
+}
+.messages {
+    height: 350px;
+    padding: 20px;
+    overflow-y: auto;
+}
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+}
+.recu {
+    background-color: #eeeeee;
+}
+.envoye {
+    background-color: #d8e8f0;
+    margin-left: auto;
+}
+.message-box {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    
+}
+.message-box input {
+    flex: 1;
+
+}
+.message-box button {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px; 
+    cursor: pointer;
 }
 
 aside {
@@ -46,7 +80,7 @@ aside {
     border: 2px solid #ffffff;
     border-radius: 15px;
     padding: 20px; 
-    min-height: 400px;
+    min-height: 500px;
 }
 aside h2 {
     margin-top: 0;
