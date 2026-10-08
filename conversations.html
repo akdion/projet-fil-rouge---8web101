@@ -18,11 +18,16 @@
     <main>
         <section class="menu">
 
-            <h3> Liste de contacts </h3>
-
-            <a href="contact.html">
-                Mes contacts 
-            </a>
+            <h3>Mes contacts </h3>
+            <div class="contact" onclick="ouvrirConversation('Marie')">
+                Coralie
+            </div>
+            <div class="contact" onclick="ouvrirConversation('Thomas')">
+                Thomas
+            </div>
+            <div class="contact" onclick="ouvrirConversation('Émilie')">
+                Émilie
+            </div>
 
             <h3> Paramètres </h3>
 
@@ -32,7 +37,27 @@
 
         </section>
         
-    </main>
+        <section class="conversations">
+            <h2> Mes conversations </h2>
+
+            <div class="conversation">
+                <div class="avatar"></div>
+
+                <div>
+                    <h3> Coralie </h3>
+                    <p>Salut, ça va ?</p>
+                </div>
+            </div>
+            
+            <div class="conversation">
+                <div>
+                    <h3>Lydia</h3>
+                    <p>On se voit demain ?</p>
+                </div>
+            </div>
+
+        </section>
+    
     
     
     
@@ -53,4 +78,8 @@
 
     </aside>
 </div> 
+    </main>
+    <script src="conversations.js">
+     </script>   
+        
 </body>
