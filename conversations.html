@@ -16,7 +16,32 @@
     </header>
 
     <main>
-        <section class="menu">
+        <section class = "menu">
+
+        </section>
+
+        <div class="messages">
+
+            <div class="message recu">
+                Salut ! Ça va ?
+            </div>
+
+            <div class="message envoye">
+                Oui, ça va bien
+            </div>
+        </div>
+
+        <div class="message-box">
+
+            <input 
+                type="text"
+                placehoder="Écrire un message..."
+            >
+            <button>
+                Envoyer
+            </button>
+        </div>
+    `;
 
             <h3>Mes contacts </h3>
             <div class="contact" onclick="ouvrirConversation('Coralie')">
@@ -44,18 +69,17 @@
     
  <div>
     <aside>
-            <h2>
-                 Groupes de discussions populaires :
-            </h2>
-            <h3> 
-                Sports 
-            </h3> <br>
-            <h3>
+            <h2> Groupes de discussions populaires : </h2>
+
+            <div class="groupe" onclick="ouvrirDiscussion('Sports')">
+                Sports
+            </div> <br>
+            <div class="groupe" onclick="ouvrirDiscussion('Actualités')">
                 Actualités
-            </h3> <br>
-            <h3> 
+            </div> <br>
+            <div class="groupe" onclick="ouvrirDiscussion('Cinéma')">
                 Cinéma
-            </h3> <br>
+            </div> <br>
 
     </aside>
 </div> 
