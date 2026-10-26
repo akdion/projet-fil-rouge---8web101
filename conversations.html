@@ -1,11 +1,12 @@
-<!doctype html>
 
+<!doctype html>
 <html>
 <head>
- <link
-        rel="stylesheet"
-        href="conversations.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
+    <link rel="stylesheet" href="conversations.css">
 </head>
 
 <body>
@@ -14,35 +15,10 @@
             Mes conversations
         </h1>
     </header>
-
+    
     <main>
         <section class = "menu">
-
-        </section>
-
-        <div class="messages">
-
-            <div class="message recu">
-                Salut ! Ça va ?
-            </div>
-
-            <div class="message envoye">
-                Oui, ça va bien
-            </div>
-        </div>
-
-        <div class="message-box">
-
-            <input 
-                type="text"
-                placehoder="Écrire un message..."
-            >
-            <button>
-                Envoyer
-            </button>
-        </div>
-    `;
-
+            
             <h3>Mes contacts </h3>
             <div class="contact" onclick="ouvrirConversation('Coralie')">
                 Coralie
@@ -53,38 +29,63 @@
             <div class="contact" onclick="ouvrirConversation('Émilie')">
                 Émilie
             </div>
-
+            
             <h3> Paramètres </h3>
-
+            
             <a href="parametres.html">
                 Ajuster mes paramètres
             </a>
-
+            
         </section>
+        <!--
+        <section>
+            
+            <div class="messages">
+                <div class="message recu">
+                    Salut ! Ça va ?
+                </div>
+                
+                <div class="message envoye">
+                    Oui, ça va bien
+                </div>
+            </div>
+            
+            <div class="message-box">
+                <input 
+                type="text"
+                placehoder="Écrire un message...">
+                <button>
+                    Envoyer
+                </button>
+            </div> 
+            
+        </section>
+        -->
         
         <section class="conversation" id="conversation">
             <h2> Mes conversations </h2>
             <p> Sélectionner un contact pour commencer une conversation.</p>
         </section>
-    
- <div>
-    <aside>
-            <h2> Groupes de discussions populaires : </h2>
-
-            <div class="groupe" onclick="ouvrirDiscussion('Sports')">
-                Sports
-            </div> <br>
-            <div class="groupe" onclick="ouvrirDiscussion('Actualités')">
-                Actualités
-            </div> <br>
-            <div class="groupe" onclick="ouvrirDiscussion('Cinéma')">
-                Cinéma
-            </div> <br>
-
-    </aside>
-</div> 
-    </main>
-
-    <script src="conversations.js"> </script>   
         
+        <div>
+            <aside>
+                <h2> Groupes de discussions populaires : </h2>
+                
+                <div class="groupe" onclick="ouvrirDiscussion('Sports')">
+                    Sports
+                </div> <br>
+                <div class="groupe" onclick="ouvrirDiscussion('Actualités')">
+                    Actualités
+                </div> <br>
+                <div class="groupe" onclick="ouvrirDiscussion('Cinéma')">
+                    Cinéma
+                </div> <br>
+                
+            </aside>
+        </div> 
+    </main>
+    
+    <script src="conversations.js"> </script>   
+    
 </body>
+</html>
