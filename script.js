@@ -1,3 +1,5 @@
-const courriel= document.querySelector("#e");
+<body>
+<script>
 
-console.log(courriel);
+  console.log("Bonjour!");
+console.log(2 + 3);
