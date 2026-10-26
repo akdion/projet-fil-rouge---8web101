@@ -1,4 +1,4 @@
-<body>
+
 <script>
 
   console.log("Bonjour!");
