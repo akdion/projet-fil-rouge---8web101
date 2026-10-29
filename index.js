@@ -26,9 +26,7 @@ function getValidCredentials() {
   return credentials;
 }
 
-/*
-Événements
-*/
+
 
 document.getElementById("form-signin").addEventListener("submit", async (event) => {
   event.preventDefault();
