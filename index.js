@@ -40,17 +40,6 @@ document.getElementById("form-signin").addEventListener("submit", async (event) 
   }
 });
 
-document.getElementById("button-signup").addEventListener("click", async () => {
-  const credentials = getValidCredentials();
-  if (!credentials) return;
-
-  const { error } = await Auth.signUp(credentials.email, credentials.password);
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Compte créé. Veuillez vérifier votre adresse courriel pour confirmer l'inscription.");
-  }
-});
 
 Auth.onSessionChange((event, session) => {
   if (session?.user) {
