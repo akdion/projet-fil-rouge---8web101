@@ -45,6 +45,6 @@ document.getElementById("form-signin").addEventListener("submit", async (event) 
 
 Auth.onSessionChange((event, session) => {
   if (session?.user) {
-    window.location.replace("./index.html");
+    window.location.replace("./conversations.html");
   }
 });

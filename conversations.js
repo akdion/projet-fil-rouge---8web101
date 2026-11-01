@@ -1,34 +1,35 @@
+const pseudo = "AnneKa";
+const formulaire = document.getElementById("message-form");
+const inputMessage = document.getElementById("message-input");
+const zoneMessages = document.getElementById("messages");
 
-function ouvrirConversation(nom) {
-    const conversation = document.getElementById("conversation");
+console.log(formulaire);
+console.log(inputMessage);
+console.log(zoneMessages);
 
-    conversation.innerHTML = `
-        <h2>${nom}</h2>
+formulaire.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const texte = inputMessage.value;
+    if (texte === "") {
+        return;
+    }
 
-        <div class="messages">
-
-            <div class="message recu">
-                Salut ! Ça va ?
-            </div>
-
-            <div class="message envoye">
-                Oui, ça va bien
-            </div>
-        </div>
-
-        <div class="message-box">
-
-            <input 
-                type="text"
-                placehoder="Écrire un message..."
-            >
-            <button>
-                Envoyer
-            </button>
-        </div>
-    `;
-
-}
+   const heure = new Date().toLocaleTimeString("fr-CA");
+    const message = document.createElement ("div");
+    message.classList.add ("message", "envoye");
+    const nomUtilisateur = document.createElement("strong");
+    nomUtilisateur.textContent = pseudo;
+    const contenuMessage = document.createElement("p");
+    contenuMessage.textContent = texte;
+    message.appendChild(nomUtilisateur);
+    message.appendChild(contenuMessage);
+    const heureMessage = document.createElement("small");
+    heureMessage.textContent = heure;
+    message.appendChild(heureMessage);
+    zoneMessages.appendChild(message);
+    inputMessage.value = "";
+    zoneMessages.scrollTop = zoneMessages.scrollHeight;
+});
 
 
     
