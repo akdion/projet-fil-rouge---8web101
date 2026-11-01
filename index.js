@@ -1,3 +1,5 @@
+console.log("coucou");
+
 const inputEmail = document.getElementById("email");
 const inputPassword = document.getElementById("password");
 
@@ -27,7 +29,7 @@ function getValidCredentials() {
 }
 
 
-
+console.log(document.getElementById("form-signin"));
 document.getElementById("form-signin").addEventListener("submit", async (event) => {
   event.preventDefault();
   
