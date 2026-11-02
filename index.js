@@ -42,7 +42,6 @@ document.getElementById("form-signin").addEventListener("submit", async (event) 
   }
 });
 
-});
 
 document.getElementById("form-signup").addEventListener("click", async () => {
   const credentials = getValidCredentials();
