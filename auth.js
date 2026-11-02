@@ -7,7 +7,7 @@ const Auth = {
     });
   },
 
-  async signUp(email, password) {
+  async signUp(email, password, username) {
     return await supabaseClient.auth.signUp({ 
       email, 
       password,

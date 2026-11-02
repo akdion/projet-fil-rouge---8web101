@@ -1,4 +1,16 @@
 const pseudo = "AnneKa";
+async function recupererPseudo() {
+    const { user, error } = await Auth.getUser();
+
+    if (error || !user) {
+        console.log("Aucun utilisateur connecté");
+        return;
+    }
+    console.log("Métadonnées :", user.user_metadata);
+    console.log("Pseudo du compte :", user.user_metadata?.username);
+}
+
+recupererPseudo();
 const formulaire = document.getElementById("message-form");
 const inputMessage = document.getElementById("message-input");
 const zoneMessages = document.getElementById("messages");
