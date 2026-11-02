@@ -1,12 +1,13 @@
-const boutonDeconnexion = document.getElementById("btn-logout");
+document.getElementById("button-signout").onclick = async () => {
+  const { error } = await Auth.signOut();
+  if (error) {
+    console.error("Impossible de se déconnecter.", error);
+  }
 
-boutonDeconnexion.addEventListener("click", async () => {
-    const { error } = await Auth.signOut();
+}
 
-    if (error) {
-        console.error("Erreur de déconnexion :", error);
-        return;
-    }
 
-    window.location.replace("index.html");
+Auth.onSessionEnded(() => {
+  Local.clearSession();
+  window.location.replace("index.html");
 });
