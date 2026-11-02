@@ -3,7 +3,12 @@ const Auth = {
   async signIn(email, password) {
     return await supabaseClient.auth.signInWithPassword({ 
       email, 
-      password 
+      password,
+      options: {
+        data: {
+          username: username
+        }
+      }
     });
   },
 

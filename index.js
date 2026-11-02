@@ -4,6 +4,7 @@ const inputEmail = document.getElementById("email");
 const inputPassword = document.getElementById("password");
 const inputEmailSignup = document.getElementById("email-signup");
 const inputPasswordSignup = document.getElementById("password-signup");
+const inputUsernameSignup = document.getElementById("username-signup");
 
 function readCredentials() {
   return {
@@ -55,11 +56,12 @@ document.getElementById("form-signup").addEventListener("submit", async (event) 
   event.preventDefault();
   const email = document.getElementById("email-signup").value.trim();
   const password = document.getElementById("password-signup").value;
-  if (!email || !password) {
+  const username = inputUsernameSignup.value.trim();
+  if (!email || !password || !username) {
     console.log("Veuillez remplir tous les champs.");
     return;
   }
-  const { error } = await Auth.signUp(email, password);
+  const { error } = await Auth.signUp(email, password, username);
   if (error) {
     console.log(error);}
     else {
