@@ -6,22 +6,27 @@
         <link
         rel="stylesheet"
         href="parametres.css">
+        
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="spclient.js" defer></script>
+
+    <script src="auth.js" defer></script>
+        <script src="parametres.js" defer></script>
+
 </head>
 
     <div>
     <h1> Paramètres </h1>
+    <br> </br>
     <a href="conversations.html"> 
     Mes conversations
     </a>
-    
-    <button type="button" class="btn-logout" id="btn-logout">
-    Se déconnecter
-    </button>
+    <br> </br>
+        <a href="index.html">
+    <button id="button-signout" type="submit">Se déconnecter</button>
+        </a>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="spclient.js"></script>
-    <script src="auth.js"></script>
-    <script src="parametres.js"></script>
+
+
 </body>
 </html>
