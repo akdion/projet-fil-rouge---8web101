@@ -59,6 +59,6 @@ document.getElementById("form-signup").addEventListener("click", async () => {
 
 Auth.onSessionChange((event, session) => {
   if (session?.user) {
-    window.location.replace("./conversations.html");
+    window.location.replace("conversations.html");
   }
 });
