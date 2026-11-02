@@ -2,6 +2,8 @@ console.log("coucou");
 
 const inputEmail = document.getElementById("email");
 const inputPassword = document.getElementById("password");
+const inputEmailSignup = document.getElementById("email-signup");
+const inputPasswordSignup = document.getElementById("password-signup");
 
 function readCredentials() {
   return {
@@ -42,18 +44,21 @@ document.getElementById("form-signin").addEventListener("submit", async (event) 
   }
 });
 
-
-document.getElementById("form-signup").addEventListener("click", async () => {
-  const credentials = getValidCredentials();
-  if (!credentials) return;
-
-  const { error } = await Auth.signUp(credentials.email, credentials.password);
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Compte créé. Veuillez vérifier votre adresse courriel pour confirmer l'inscription.");
+document.getElementById("form-signup").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = document.getElementById("email-signup").value.trim();
+  const password = document.getElementById("password-signup").value;
+  if (!email || !password) {
+    console.log("Veuillez remplir tous les champs.");
+    return;
   }
-});
+  const { error } = await Auth.signUp(email, password);
+  if (error) {
+    console.log(error);}
+    else {
+      console.log("Compte créer avec succès !");
+    }
+  });
 
 
 

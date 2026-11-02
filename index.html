@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <meta charget="utf-8">
+    <meta charget="UTF-8">
     <title>Messagerie</title>
     <meta name="description" content="Blabla">
     
@@ -25,40 +25,29 @@
         <h2>Connexion</h2>
         
             <form id="form-signin">
-            <label for="e">Email :</label>
-            <input type="email" id="e" name="email">
-            <label for="pwd">Mot de passe :</label>
-            <input type="password" id="pwd" name="password">
-            
-            <label>
-                <input type="checkbox"
-                name="Se souvenir de moi"> Se souvenir de moi
-            </label> <br> <br>
-            
-            <input type="submit" value="Se connecter"> <br> <br>
+                <label for="e">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <label for="pwd">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+                <label>
+                    <input type="checkbox" name="remember"> Se souvenir de moi 
+                </label> 
+                <input type="submit" value="Se connecter">
             </form>
-        
-        <input type="submit" value="Mot de passe oublié">        
+            <input type="submit" value="Mot de passe oublié">        
     </div>
     
     <div>
         <h2>Inscription</h2>
         <form id="form-signup">
-
-        
-        <label for="e">Email :</label>
-        <input type="email" id="e" ame="email">
-        
-        <label for="pwd">Choisir un mot de passe :</label>
-        <input type="password" id="pwd" name="password"> <br> <br>
-        
-        
-        <input type="submit" value="S'inscrire">
+            <label for="email-signup">Email :</label>
+            <input type="email" id="email-signup" name="email" required>
+            <label for="password-signup">Choisir un mot de passe :</label>
+            <input type="password" id="password-signup" name="password" required>
+            <input type="submit" value="S'inscrire">
         </form>
         
     </div>
-    
- 
 </body>
 </html>
 
