@@ -1,12 +1,12 @@
-console.log("coucou");
+const inputEmailsignup = document.getElementById("signup-email");
+console.log(inputEmailsignup);
+const inputPasswordsignup = document.getElementById("signup-password");
 
-const inputEmail = document.getElementById("email");
-const inputPassword = document.getElementById("password");
-const inputEmailSignup = document.getElementById("email-signup");
-const inputPasswordSignup = document.getElementById("password-signup");
-const inputUsernameSignup = document.getElementById("username-signup");
+const inputEmailsignin = document.getElementById("signin-email");
+console.log(inputEmailsignin);
+const inputPasswordsignin = document.getElementById("signin-password");
 
-function readCredentials() {
+function readCredentials(inputEmail, inputPassword) {
   return {
     email: inputEmail.value.trim(),
     password: inputPassword.value,
@@ -21,8 +21,8 @@ function validateCredentials(credentials) {
   return null;
 }
 
-function getValidCredentials() {
-  const credentials = readCredentials();
+function getValidCredentials(inputEmail, inputPassword) {
+  const credentials = readCredentials(inputEmail, inputPassword);
   const validationError = validateCredentials(credentials);
   if (validationError) {
     console.log(validationError);
@@ -36,45 +36,33 @@ console.log(document.getElementById("form-signin"));
 document.getElementById("form-signin").addEventListener("submit", async (event) => {
   event.preventDefault();
   
-  const credentials = getValidCredentials();
+  const credentials = getValidCredentials(inputEmailsignin, inputPasswordsignin);
   if (!credentials) return;
-
-
-const { data, error } = await Auth.signIn(
-    credentials.email,
-    credentials.password
-);
-
-if (error) {
-    console.error("Erreur de connexion :", error);
-} else {
-    console.log("Connexion réussie :", data);
-}
+  
+  const { error } = await Auth.signIn(credentials.email, credentials.password);
+  if (error) {
+    console.log(error);
+  }
 });
+
 
 document.getElementById("form-signup").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const email = document.getElementById("email-signup").value.trim();
-  const password = document.getElementById("password-signup").value;
-  const username = inputUsernameSignup.value.trim();
-  if (!email || !password || !username) {
-    console.log("Veuillez remplir tous les champs.");
-    return;
-  }
-  const { error } = await Auth.signUp(email, password, username);
+  const credentials = getValidCredentials(inputEmailsignup, inputPasswordsignup);
+  if (!credentials) return;
+
+  const { error } = await Auth.signUp(credentials.email, credentials.password);
   if (error) {
-    console.log(error);}
-    else {
-      console.log("Compte créer avec succès !");
-    }
-  });
-  
+    console.log(error);
+  } else {
+    console.log("Compte créé. Veuillez vérifier votre adresse courriel pour confirmer l'inscription.");
+  }
+});
+
+
+
 Auth.onSessionChange((event, session) => {
-
-    console.log("Événement de session :", event);
-    console.log("Utilisateur connecté :", !!session?.user);
-
-    if (session?.user) {
-        window.location.replace("conversations.html");
-    }
+  if (session?.user) {
+    window.location.replace("conversations.html");
+  }
 });
