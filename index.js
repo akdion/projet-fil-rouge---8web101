@@ -68,15 +68,7 @@ document.getElementById("form-signup").addEventListener("submit", async (event) 
       console.log("Compte créer avec succès !");
     }
   });
-
-
-
-Auth.onSessionChange((event, session) => {
-  if (session?.user) {
-    window.location.replace("conversations.html");
-  }
-});
-
+  
 Auth.onSessionChange((event, session) => {
 
     console.log("Événement de session :", event);

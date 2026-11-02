@@ -1,11 +1,22 @@
 const pseudo = "AnneKa";
 async function recupererPseudo() {
     const { user, error } = await Auth.getUser();
+    if (user && !user.user_metadata?.username) {
+    const { error: updateError } = await Auth.updateUsername("AnneKa");
+
+    if (updateError) {
+        console.error("Erreur de mise à jour :", updateError);
+    } else {
+        console.log("Pseudo enregistré avec succès !");
+    }
+}
 
     if (error || !user) {
         console.log("Aucun utilisateur connecté");
         return;
     }
+    console.log("Courriel du compte connecté :", user.email);
+    console.log("Pseudo enregistré :", user.user_metadata?.username);
     console.log("Métadonnées :", user.user_metadata);
     console.log("Pseudo du compte :", user.user_metadata?.username);
 }
