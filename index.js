@@ -37,11 +37,18 @@ document.getElementById("form-signin").addEventListener("submit", async (event) 
   
   const credentials = getValidCredentials();
   if (!credentials) return;
-  
-  const { error } = await Auth.signIn(credentials.email, credentials.password);
-  if (error) {
-    console.log(error);
-  }
+
+
+const { data, error } = await Auth.signIn(
+    credentials.email,
+    credentials.password
+);
+
+if (error) {
+    console.error("Erreur de connexion :", error);
+} else {
+    console.log("Connexion réussie :", data);
+}
 });
 
 document.getElementById("form-signup").addEventListener("submit", async (event) => {
@@ -66,4 +73,14 @@ Auth.onSessionChange((event, session) => {
   if (session?.user) {
     window.location.replace("conversations.html");
   }
+});
+
+Auth.onSessionChange((event, session) => {
+
+    console.log("Événement de session :", event);
+    console.log("Utilisateur connecté :", !!session?.user);
+
+    if (session?.user) {
+        window.location.replace("conversations.html");
+    }
 });
