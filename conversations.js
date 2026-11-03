@@ -1,41 +1,114 @@
-const pseudo = "AnneKa";
+
+let pseudo = "Utilisateur";
+
 async function recupererPseudo() {
     const { user, error } = await Auth.getUser();
-    if (user && !user.user_metadata?.username) {
-    const { error: updateError } = await Auth.updateUsername("AnneKa");
-
-    if (updateError) {
-        console.error("Erreur de mise à jour :", updateError);
-    } else {
-        console.log("Pseudo enregistré avec succès !");
-    }
-}
-
+    console.log("Utilisateur trouvé :", !!user);
+    console.log("Erreur de session :", error?.message);
     if (error || !user) {
         console.log("Aucun utilisateur connecté");
         return;
     }
-    console.log("Courriel du compte connecté :", user.email);
-    console.log("Pseudo enregistré :", user.user_metadata?.username);
-    console.log("Métadonnées :", user.user_metadata);
-    console.log("Pseudo du compte :", user.user_metadata?.username);
+
+    pseudo = user.email;
+    console.log("Courriel récupéré :", pseudo);
 }
 
 recupererPseudo();
+
 const formulaire = document.getElementById("message-form");
+recupererPseudo();
 const inputMessage = document.getElementById("message-input");
 const zoneMessages = document.getElementById("messages");
+async function enregistrerMessage(texte) {
+    const { user, error: erreurUtilisateur } = await Auth.getUser();
+
+    if (erreurUtilisateur || !user) {
+        console.error("Aucun utilisateur connecté");
+        return false;
+    }
+
+    const { data: salons, error: erreurSalon } = await supabaseClient
+        .from("channels")
+        .select("id")
+        .eq("name", "general")
+        .single();
+
+    if (erreurSalon) {
+        console.error("Impossible de trouver le salon général :", erreurSalon);
+        return false;
+    }
+
+    const { error } = await supabaseClient
+        .from("messages")
+        .insert({
+            channel_id: salons.id,
+            user_id: user.id,
+            username: user.email,
+            content: texte
+        });
+
+    if (error) {
+        console.error("Erreur lors de l'enregistrement :", error);
+        return false;
+    }
+
+    console.log("Message enregistré dans Supabase !");
+    return true;
+}
+async function chargerMessages() {
+    const { data, error } = await supabaseClient
+        .from("messages")
+        .select("username, content, created_at")
+        .order("created_at", { ascending: true });
+
+    if (error) {
+        console.error("Erreur de chargement :", error);
+        return;
+    }
+
+    zoneMessages.innerHTML = "";
+
+    data.forEach(function(message) {
+        const element = document.createElement("div");
+        element.classList.add("message");
+
+        const nom = document.createElement("strong");
+        nom.textContent = message.username;
+
+        const contenu = document.createElement("p");
+        contenu.textContent = message.content;
+
+        const heure = document.createElement("small");
+        heure.textContent = new Date(message.created_at)
+            .toLocaleTimeString("fr-CA");
+
+        element.appendChild(nom);
+        element.appendChild(contenu);
+        element.appendChild(heure);
+
+        zoneMessages.appendChild(element);
+    });
+
+    zoneMessages.scrollTop = zoneMessages.scrollHeight;
+}
 
 console.log(formulaire);
 console.log(inputMessage);
 console.log(zoneMessages);
 
-formulaire.addEventListener("submit", function(event) {
+formulaire.addEventListener("submit", async function(event) {
     event.preventDefault();
     const texte = inputMessage.value;
     if (texte === "") {
         return;
     }
+    const enregistre = await enregistrerMessage(texte);
+
+    if (!enregistre) {
+    alert("Le message n'a pas pu être enregistré.");
+    return;
+}
 
    const heure = new Date().toLocaleTimeString("fr-CA");
     const message = document.createElement ("div");
@@ -53,6 +126,22 @@ formulaire.addEventListener("submit", function(event) {
     inputMessage.value = "";
     zoneMessages.scrollTop = zoneMessages.scrollHeight;
 });
-
-
+chargerMessages();
+supabaseClient
+    .channel("chat-general-realtime")
+    .on(
+        "postgres_changes",
+        {
+            event: "INSERT",
+            schema: "public",
+            table: "messages"
+        },
+        (payload) => {
+            console.log("Nouveau message reçu :", payload.new);
+            chargerMessages();
+        }
+    )
+    .subscribe((status) => {
+        console.log("Statut Realtime :", status);
+    });
     

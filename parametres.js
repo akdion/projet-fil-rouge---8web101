@@ -7,6 +7,5 @@ document.getElementById("button-signout").onclick = async () => {
 }
 
 Auth.onSessionEnded(() => {
-  Local.clearSession();
   window.location.replace("index.html");
 });
