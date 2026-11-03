@@ -59,7 +59,7 @@ async function enregistrerMessage(texte) {
 async function chargerMessages() {
     const { data, error } = await supabaseClient
         .from("messages")
-        .select("username, content, created_at")
+        .select("username, content, created_at, user_id")
         .order("created_at", { ascending: true });
 
     if (error) {
@@ -69,9 +69,15 @@ async function chargerMessages() {
 
     zoneMessages.innerHTML = "";
 
-    data.forEach(function(message) {
-        const element = document.createElement("div");
-        element.classList.add("message");
+    const { user } = await Auth.getUser();
+
+data.forEach(function(message) {
+    const element = document.createElement("div");
+    element.classList.add("message");
+
+    if (user && message.user_id === user.id) {
+        element.classList.add("envoye");
+    }
 
         const nom = document.createElement("strong");
         nom.textContent = message.username;
@@ -127,6 +133,8 @@ formulaire.addEventListener("submit", async function(event) {
     zoneMessages.scrollTop = zoneMessages.scrollHeight;
 });
 chargerMessages();
+const sonNotification = new Audio("notification.mp3");
+    sonNotification.volume = 0.4;
 supabaseClient
     .channel("chat-general-realtime")
     .on(
@@ -136,12 +144,24 @@ supabaseClient
             schema: "public",
             table: "messages"
         },
-        (payload) => {
+        async (payload) => {
             console.log("Nouveau message reçu :", payload.new);
+
+            const { user } = await Auth.getUser();
+
+            
+            if (user && payload.new.user_id !== user.id) {
+                sonNotification.currentTime = 0;
+
+                sonNotification.play().catch((error) => {
+                    console.log("Son bloqué par le navigateur :", error);
+                });
+            }
+
+            
             chargerMessages();
         }
     )
     .subscribe((status) => {
         console.log("Statut Realtime :", status);
     });
-    

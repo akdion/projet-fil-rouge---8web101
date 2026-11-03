@@ -55,16 +55,20 @@ main {
 }
 .message {
     background-color: white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    max-width: 75%;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    border-radius: 18px 18px 18px 5px;
+    max-width: 70%;
+    width: fit-content;
     overflow-wrap: anywhere;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 .envoye {
-    background-color: #d8e8f0;
+    background-color: #f6a6c8;
     margin-left: auto;
+    border-radius: 18px 18px 5px 18px;
 }
+
 .message-box {
     display: flex;
     gap: 10px;
@@ -101,10 +105,25 @@ main {
         min-height: 300px;
     }
 }
+
+.message strong {
+    display: block;
+    font-size: 12px;
+    color: #a52c67;
+    margin-bottom: 6px;
+}
+
+.message p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
 .message small {
     display: block;
-    font-size: 11px;
-    color: gray;
+    font-size: 10px;
+    color: #777;
     text-align: right;
-    margin-top: 5px;
+    margin-top: 7px;
 }
