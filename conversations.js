@@ -1,5 +1,6 @@
 
 let pseudo = "Utilisateur";
+let salonActuel = null;
 
 async function recupererPseudo() {
     const { user, error } = await Auth.getUser();
@@ -20,6 +21,7 @@ const formulaire = document.getElementById("message-form");
 recupererPseudo();
 const inputMessage = document.getElementById("message-input");
 const zoneMessages = document.getElementById("messages");
+
 async function enregistrerMessage(texte) {
     const { user, error: erreurUtilisateur } = await Auth.getUser();
 
@@ -28,21 +30,15 @@ async function enregistrerMessage(texte) {
         return false;
     }
 
-    const { data: salons, error: erreurSalon } = await supabaseClient
-        .from("channels")
-        .select("id")
-        .eq("name", "general")
-        .single();
-
-    if (erreurSalon) {
-        console.error("Impossible de trouver le salon général :", erreurSalon);
-        return false;
-    }
+    if (!salonActuel) {
+    alert("Sélectionne un salon avant d'envoyer un message.");
+    return false;
+}
 
     const { error } = await supabaseClient
         .from("messages")
         .insert({
-            channel_id: salons.id,
+            channel_id: salonActuel,
             user_id: user.id,
             username: user.email,
             content: texte
@@ -57,15 +53,15 @@ async function enregistrerMessage(texte) {
     return true;
 }
 async function chargerMessages() {
-    const { data, error } = await supabaseClient
-        .from("messages")
-        .select("username, content, created_at, user_id")
-        .order("created_at", { ascending: true });
+    if (!salonActuel) {
+    return;
+}
 
-    if (error) {
-        console.error("Erreur de chargement :", error);
-        return;
-    }
+const { data, error } = await supabaseClient
+    .from("messages")
+    .select("username, content, created_at, user_id")
+    .eq("channel_id", salonActuel)
+    .order("created_at", { ascending: true });
 
     zoneMessages.innerHTML = "";
 
@@ -146,7 +142,9 @@ supabaseClient
         },
         async (payload) => {
             console.log("Nouveau message reçu :", payload.new);
-
+                if (payload.new.channel_id !== salonActuel) {
+                    return;
+                }
             const { user } = await Auth.getUser();
 
             
@@ -219,3 +217,136 @@ async function afficherUtilisateursConnectes() {
 }
 
 afficherUtilisateursConnectes();
+const boutonCreerSalon = document.getElementById("creer-salon");
+const formulaireSalon = document.getElementById("formulaire-salon");
+const inputNomSalon = document.getElementById("nom-salon");
+const boutonConfirmerSalon = document.getElementById("confirmer-salon");
+
+boutonCreerSalon.addEventListener("click", function() {
+    formulaireSalon.hidden = !formulaireSalon.hidden;
+});
+
+boutonConfirmerSalon.addEventListener("click", async function() {
+    const nomSalon = inputNomSalon.value.trim();
+
+    if (nomSalon === "") {
+        alert("Entre un nom pour ton salon.");
+        return;
+    }
+
+    const { user, error: erreurUtilisateur } = await Auth.getUser();
+
+    if (erreurUtilisateur || !user) {
+        console.error("Utilisateur non connecté");
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("channels")
+        .insert({
+            name: nomSalon,
+            created_by: user.id
+        });
+
+    if (error) {
+    console.error("Code :", error.code);
+    console.error("Message :", error.message);
+    console.error("Détails :", error.details);
+    return;
+}
+
+    console.log("Salon créé avec succès !");
+    inputNomSalon.value = "";
+    formulaireSalon.hidden = true;
+
+    await chargerSalons();
+});
+
+async function chargerSalons() {
+    const { data, error } = await supabaseClient
+        .from("channels")
+        .select("id, name, created_by")
+        .order("name", { ascending: true });
+
+    if (error) {
+        console.error("Erreur de chargement des salons :", error);
+        return;
+    }
+
+    const { user } = await Auth.getUser();
+    const listeSalons = document.getElementById("liste-salons");
+
+    listeSalons.innerHTML = "";
+
+    data.forEach(function(salon) {
+        const element = document.createElement("div");
+        element.classList.add("salon");
+
+        const nomSalon = document.createElement("span");
+        nomSalon.textContent = "# " + salon.name;
+
+        element.appendChild(nomSalon);
+
+        element.addEventListener("click", function() {
+            salonActuel = salon.id;
+
+            document.getElementById("titre-salon").textContent =
+                "# " + salon.name;
+
+            chargerMessages();
+        });
+
+        if (
+            user &&
+            salon.created_by === user.id &&
+            salon.name !== "general"
+        ) {
+            const boutonSupprimer = document.createElement("button");
+            boutonSupprimer.type = "button";
+            boutonSupprimer.classList.add("supprimer-salon");
+            boutonSupprimer.textContent = "🗑️";
+            boutonSupprimer.title = "Supprimer le salon";
+
+            boutonSupprimer.addEventListener("click", async function(event) {
+                event.stopPropagation();
+
+                const confirmation = confirm(
+                    "Supprimer le salon " + salon.name +
+                    " et tous ses messages ?"
+                );
+
+                if (!confirmation) return;
+
+                const { data: supprimes, error: erreurSuppression } =
+                    await supabaseClient
+                        .from("channels")
+                        .delete()
+                        .eq("id", salon.id)
+                        .select("id");
+
+                if (erreurSuppression || !supprimes?.length) {
+                    console.error(
+                        "Erreur de suppression :",
+                        erreurSuppression
+                    );
+                    alert("Impossible de supprimer ce salon.");
+                    return;
+                }
+
+                if (salonActuel === salon.id) {
+                    salonActuel = null;
+                    zoneMessages.innerHTML = "";
+                    document.getElementById("titre-salon").textContent =
+                        "Sélectionne un salon";
+                }
+
+                await chargerSalons();
+            });
+
+            element.appendChild(boutonSupprimer);
+        }
+
+        listeSalons.appendChild(element);
+    });
+}
+chargerSalons();

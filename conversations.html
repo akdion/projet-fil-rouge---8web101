@@ -16,15 +16,27 @@
     <main>
         <section class = "menu">
             
-            <h3>Navigation</h3>
-            <div class= salon>Chat général</div>
+            <h3>Salons de discussion</h3>
+
+                <div id="liste-salons">
+                <div class="salon">Chat général</div>
+                </div>
+
+                <button id="creer-salon" type="button"> + Créer un salon </button>
+                <div id="formulaire-salon" hidden>
+                <input type="text" id="nom-salon" placeholder="Nom du nouveau salon" maxlength="50">
+
+                <button type="button" id="confirmer-salon">
+                    Créer
+                </button>
+                </div>
             
             <h3>Paramètres</h3>
             <a href = "parametres.html">Mes paramètres</a>
          </section>
 
          <section class= "conversation">
-            <h2>Chat général</h2>
+            <h2 id="titre-salon">Chat général</h2>
 
             <div class="messages" id="messages">
                 <p>Bienvenue dans le chat !</p>
