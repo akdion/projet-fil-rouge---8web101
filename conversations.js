@@ -165,3 +165,57 @@ supabaseClient
     .subscribe((status) => {
         console.log("Statut Realtime :", status);
     });
+async function afficherUtilisateursConnectes() {
+    const { user, error } = await Auth.getUser();
+
+    if (error || !user) {
+        console.error("Utilisateur non connecté");
+        return;
+    }
+
+    const zoneUtilisateurs = document.getElementById("utilisateurs");
+
+    const presenceChannel = supabaseClient.channel("utilisateurs-en-ligne", {
+        config: {
+            presence: {
+                key: user.id
+            }
+        }
+    });
+
+    function mettreAJourUtilisateurs() {
+        const utilisateurs = presenceChannel.presenceState();
+
+        zoneUtilisateurs.innerHTML = "";
+
+        Object.values(utilisateurs).forEach(function(presences) {
+            if (presences.length === 0) return;
+
+            const utilisateur = document.createElement("div");
+            utilisateur.classList.add("utilisateur-connecte");
+
+            const indicateur = document.createElement("span");
+            indicateur.classList.add("statut-en-ligne");
+
+            const nom = document.createElement("span");
+            nom.textContent = presences[0].email;
+
+            utilisateur.appendChild(indicateur);
+            utilisateur.appendChild(nom);
+
+            zoneUtilisateurs.appendChild(utilisateur);
+        });
+    }
+
+    presenceChannel
+        .on("presence", { event: "sync" }, mettreAJourUtilisateurs)
+        .subscribe(async (status) => {
+            if (status === "SUBSCRIBED") {
+                await presenceChannel.track({
+                    email: user.email
+                });
+            }
+        });
+}
+
+afficherUtilisateursConnectes();

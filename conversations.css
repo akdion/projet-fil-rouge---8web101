@@ -127,3 +127,23 @@ main {
     text-align: right;
     margin-top: 7px;
 }
+.utilisateur-connecte {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.statut-en-ligne {
+    width: 9px;
+    height: 9px;
+    background-color: #35b86b;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 5px rgba(53, 184, 107, 0.4);
+}
