@@ -5,6 +5,7 @@
 <br>
 -BELA24600100, Belley-Guimond, Alexandrine
 <br>
+<br>
 Messagerie instanée pour échanger des messages dans un chat général ou dans des sessions entre des utilisateurs spécifiques. 
 <br>
 Fonctionnalités :
