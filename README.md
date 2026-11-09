@@ -66,32 +66,6 @@ webchat/
         ├── conversations.js   Logique de la page principale
         <br>
         
-
-Architecture : 
-<br>
-Pages (écoute des événements, manipulation du document)
-<br>
-   ┌──────────┬──────────────┬─────────────┐
-   │ chat.js  │  signin.js   │ settings.js │
-   └────┬─────┴──────┬───────┴──────┬──────┘
-   <br>
-        │            │              │
-        ▼            ▼              ▼
-        <br>
-   ┌─────────┐  ┌─────────┐   ┌──────────┐
-   │ data.js │  │ auth.js │   │ local.js │   Services
-   │ (Data)  │  │ (Auth)  │   │ (Local)  │
-   └────┬────┘  └────┬────┘   └────┬─────┘
-        └─────┬──────┘             │
-        <br>
-              ▼                    ▼
-        ┌────────────┐     localStorage /
-        │ spclient.js│     sessionStorage
-        └─────┬──────┘
-              ▼
-              <br>
-          Supabase
-
           
 
 Images - Annexe
