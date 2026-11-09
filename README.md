@@ -23,27 +23,48 @@ Fonctionnalités :
 <br>
 
 Technologies :
+<br>
 •Interaface = HTML, CSS, Javascript
+<br>
 •Authentification et base de données = Supabase
+<br>
 •Bibliothèque côté client = supabase.js
+<br>
 
 Structure de projet :
+<br>
 webchat/
+<br>
 ├── index.html          Page principale (Inscription et connexion)
+<br>
 ├── parametres.html         Déconnexion et retour aux conversations
+<br>
 ├── conversations.html       Page contenant le chat général ainsi que les salons. Contient également l'option de se rendre aux parametres
+<br>
 └── ressources/
-    ├── styles/            
+<br>
+    ├── styles/        
+    <br>
     │   ├── conversations.css    Mise en page des salons et messages
+    <br>
     │   ├── index.css    Mise en age de connexion et d'inscription
+    <br>
     │   └── parametres.css   Mise en page de parametres
+    <br>
     └── scripts/
+    <br>
         ├── script.js    Accès aux données (objet Data)
+        <br>
         ├── spclient.js Configuration et création du client Supabase
+        <br>
         ├── auth.js     Authentification (objet Auth)
+        <br>
         ├── index.js     Logique page de connexion
+        <br>
         ├── parametres.js     Logique de la page des parametres
+        <br>
         ├── conversations.js   Logique de la page principale
+        <br>
         
 
 Architecture : 
